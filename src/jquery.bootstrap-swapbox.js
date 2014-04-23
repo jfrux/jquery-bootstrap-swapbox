@@ -17,18 +17,19 @@
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
+        return;
       }
 
       Swapbox.prototype.init = function() {
         this.retrieveItems();
-        return this.build();
+        this.build();
       };
 
       Swapbox.prototype.build = function() {
         this.buildWrap();
         this.buildList();
         this.buildItems();
-        return this.buildTrigger();
+        this.buildTrigger();
       };
 
       Swapbox.prototype.buildWrap = function() {

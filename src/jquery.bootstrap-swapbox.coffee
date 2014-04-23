@@ -15,31 +15,32 @@ do ($ = jQuery) -> #, window, document
 		listCssClass: "swapbox-list dropdown-menu"
 		itemPrepend: "<span>"
 		itemAppend: "</span>"
+
 	
 	# The actual plugin constructor
 	class Swapbox
 		constructor: (@element, options) ->
-			
 			@options = $.extend {}, defaults, options
 			@_defaults = defaults
 			@_name = pluginName
 			@init()
-
+			return
 		init: ->
 			@retrieveItems()
-
 			@build()
-
+			return
 		build: ->
 			@buildWrap()
 			@buildList()
 			@buildItems()
 			@buildTrigger()
+			return
 		buildWrap: ->
 			@$wrap = $("<div></div>")
 			@$wrap.addClass(@options.wrapCssClass)
 			@$wrap.insertAfter($(@element))
 			return
+
 		buildList: ->
 			@$list = $("<ul></ul>")
 			@$list.attr("role","menu")

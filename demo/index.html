@@ -15,6 +15,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="../dist/jquery.bootstrap-swapbox.js"></script>
     <script src="demo.js"></script>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
     <link rel="stylesheet" type="text/css" href="demo.css" />
 </head>
 
@@ -88,12 +90,12 @@
                             $("#swapbox-demo-1").swapbox();
                         });
                     </script>
-
 <pre>
+<code class="html">
 &lt;select id="swapbox-demo-1" name="choice-toggle"&gt;
-    &lt;option data-icon-class="fa fa-book" value="all"&gt;All Upcoming Events&lt;/option&gt;
-    &lt;option data-icon-class="fa fa-calendar" value="live"&gt;Upcoming Live Events&lt;/option&gt;
-    &lt;option data-icon-class="fa fa-cloud" value="online"&gt;Online Courses&lt;/option&gt;
+    &lt;option value="all"&gt;All Upcoming Events&lt;/option&gt;
+    &lt;option value="live"&gt;Upcoming Live Events&lt;/option&gt;
+    &lt;option value="online"&gt;Online Courses&lt;/option&gt;
 &lt;/select&gt;
 
 &lt;script&gt;
@@ -101,6 +103,7 @@
         $("#swapbox-demo-1").swapbox();
     });
 &lt;/script&gt;
+</code>
 </pre>
 
                     <h1>Dynamic Append / Prepend Overrides</h1>
@@ -124,6 +127,7 @@
                     </script>
 
 <pre>
+<code class="html">
 &lt;select id="swapbox-demo-2" name="choice-toggle"&gt;
     &lt;option data-icon-class="fa fa-book" value="all"&gt;All Upcoming Events&lt;/option&gt;
     &lt;option data-icon-class="fa fa-calendar" value="live"&gt;Upcoming Live Events&lt;/option&gt;
@@ -142,7 +146,7 @@
         });
     });
 &lt;/script&gt;
-</pre>
+</code>
                 </div>
             </div>
         </div>
@@ -169,7 +173,11 @@
             </div>
         </div>
     </section>
-
+    <script>
+    $(document).ready(function() {
+      $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+    });
+    </script>
     <!-- Core JavaScript Files -->
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -10,7 +10,6 @@
   (function($) {
     var Swapbox, defaults, pluginName;
     pluginName = "swapbox";
-    
     defaults = {
       wrapCssClass: "swapbox-wrapper btn-group",
       triggerCssClass: "swapbox-toggle btn btn-default dropdown-toggle",
@@ -19,7 +18,6 @@
       itemPrepend: "<span>",
       itemAppend: "</span>"
     };
-    
     Swapbox = (function() {
       function Swapbox(element, options) {
         this.element = element;
@@ -27,18 +25,19 @@
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
+        return;
       }
 
       Swapbox.prototype.init = function() {
         this.retrieveItems();
-        return this.build();
+        this.build();
       };
 
       Swapbox.prototype.build = function() {
         this.buildWrap();
         this.buildList();
         this.buildItems();
-        return this.buildTrigger();
+        this.buildTrigger();
       };
 
       Swapbox.prototype.buildWrap = function() {

@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		// Import package manifest
-		pkg: grunt.file.readJSON("swapbox.jquery.json"),
+		pkg: grunt.file.readJSON("bootstrap-swapbox.jquery.json"),
 
 		// Banner definitions
 		meta: {
