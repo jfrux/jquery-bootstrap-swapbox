@@ -176,6 +176,17 @@
     <script>
     $(document).ready(function() {
       $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+
+      $("section").each(function() {
+        var $section = $(this);
+        var childHeight = 0;
+
+        $section.children().each(function() {
+            childHeight = childHeight + $(this).outerHeight() + 150;
+        });
+
+        $section.height(childHeight);
+      });
     });
     </script>
     <!-- Core JavaScript Files -->
