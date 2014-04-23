@@ -1,0 +1,36 @@
+{
+	"name": "jquery-bootstrap-swapbox",
+	"title": "Bootstrap Swapbox",
+	"description": "An alternative to the HTML select-box.",
+	"keywords": [
+		"jquery",
+		"swapbox",
+		"plugins"
+	],
+	"version": "0.0.1",
+	"author": {
+		"name": "Joshua F. Rountree",
+		"email": "joshua@swodev.com",
+		"url": "https://github.com/joshuairl"
+	},
+	"maintainers": [
+		{
+			"name": "Joshua F. Rountree",
+			"email": "joshua@swodev.com",
+			"url": "https://github.com/joshuairl"
+		}
+	],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://zenorocha.mit-license.org/"
+		}
+	],
+	"bugs": "https://github.com/joshuairl/jquery-bootstrap-swapbox/issues",
+	"homepage": "https://github.com/joshuairl/jquery-bootstrap-swapbox",
+	"docs": "https://github.com/joshuairl/jquery-bootstrap-swapbox#readme",
+	"download": "https://github.com/joshuairl/jquery-bootstrap-swapbox/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.4"
+	}
+}

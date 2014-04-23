@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bootstrap-Swapbox</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../dist/jquery.bootstrap-swapbox.js"></script>
+    <script src="demo.js"></script>
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+<body data-spy="scroll" data-target=".navbar-collapse">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Bootstrap-Swapbox</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">What is it?</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#usage">Usage</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#download">Download</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#support">Support</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>What is Bootstrap-Swapbox?</h1>
+                    <p>A bootstrap-extension that converts a standard select box into a select box with a twist.</p>
+                    <p>The twist is that while other select boxes leave the dropdown options the same after you choose one, this select box will hide the selected option from the list.</p>
+                    <p>I know, not that exciting... but to see similar functionality in the wild, checkout the News Feed filter button on the Facebook Mobile App on iOS.  This is what I was going for.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="usage-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Simple Usage / Example</h1>
+                    <select id="swapbox-demo-1" name="choice-toggle">
+                        <option value="all">All Upcoming Events</option>
+                        <option value="live">Upcoming Live Events</option>
+                        <option value="online">Online Courses</option>
+                    </select>
+
+                    <script>
+                        $(function() {
+                            $("#swapbox-demo-1").swapbox();
+                        });
+                    </script>
+
+<pre>
+&lt;select id="swapbox-demo-1" name="choice-toggle"&gt;
+    &lt;option data-icon-class="fa fa-book" value="all"&gt;All Upcoming Events&lt;/option&gt;
+    &lt;option data-icon-class="fa fa-calendar" value="live"&gt;Upcoming Live Events&lt;/option&gt;
+    &lt;option data-icon-class="fa fa-cloud" value="online"&gt;Online Courses&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $(function() {
+        $("#swapbox-demo-1").swapbox();
+    });
+&lt;/script&gt;
+</pre>
+
+                    <h1>Dynamic Append / Prepend Overrides</h1>
+                    <select id="swapbox-demo-2" name="choice-toggle">
+                        <option data-icon-class="fa fa-book" value="all">All Upcoming Events</option>
+                        <option data-icon-class="fa fa-calendar" value="live">Upcoming Live Events</option>
+                        <option data-icon-class="fa fa-cloud" value="online">Online Courses</option>
+                    </select>
+
+                    <script>
+                        $(function() {
+                            $("#swapbox-demo-2").swapbox({
+                                itemPrepend: function(item) {
+                                    return "<span class='" + item.$option.attr('data-icon-class') + "'></span> ";
+                                },
+                                itemAppend: function() {
+                                    return "";
+                                }
+                            });
+                        });
+                    </script>
+
+<pre>
+&lt;select id="swapbox-demo-2" name="choice-toggle"&gt;
+    &lt;option data-icon-class="fa fa-book" value="all"&gt;All Upcoming Events&lt;/option&gt;
+    &lt;option data-icon-class="fa fa-calendar" value="live"&gt;Upcoming Live Events&lt;/option&gt;
+    &lt;option data-icon-class="fa fa-cloud" value="online"&gt;Online Courses&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $(function() {
+        $("#swapbox-demo-2").swapbox({
+            itemPrepend: function(item) {
+                return "&lt;a href='#'&gt;&lt;span class='" + item.$option.attr('data-icon-class') + "'&gt;&lt;/span&gt; ";
+            },
+            itemAppend: function() {
+                return "&lt;/a&gt;";
+            }
+        });
+    });
+&lt;/script&gt;
+</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Download</h1>
+                    <p><a href="https://github.com/joshuairl/jquery-bootstrap-swapbox/issues">https://github.com/joshuairl/jquery-bootstrap-swapbox</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="support-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Support / Issues</h1>
+                    <p>Visit <a href="https://github.com/joshuairl/jquery-bootstrap-swapbox/issues">https://github.com/joshuairl/jquery-bootstrap-swapbox/issues</a> and create an issue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core JavaScript Files -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

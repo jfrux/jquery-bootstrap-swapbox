@@ -1,0 +1,18 @@
+{
+	"name": "jquery-bootstrap-swapbox",
+	"version": "0.0.1",
+	"homepage": "https://github.com/joshuairl/jquery-bootstrap-swapbox",
+	"authors": [
+		"Joshua F. Rountree <joshua@swodev.com>"
+	],
+	"description": "An alternative to the HTML select-box.",
+	"main": "src/jquery.bootstrap-swapbox.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"swapbox",
+		"jquery-plugin",
+		"jquery-bootstrap-swapbox"
+	],
+	"license": "MIT"
+}
