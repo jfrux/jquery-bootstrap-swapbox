@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         tasks: ["coffee", "jshint", "concat", "uglify"]
       },
       less: {
-				files: ["src/demo/less/*.less"],
+				files: ["src/demo/less/*.less","src/demo/less/bootstrap/*.less"],
         tasks: ["less"]
       }
 		},

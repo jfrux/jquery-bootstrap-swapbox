@@ -9,14 +9,11 @@
 
     <title>Bootstrap-Swapbox</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="../dist/jquery.bootstrap-swapbox.js"></script>
     <script src="demo.js"></script>
-    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
-    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="//yandex.st/highlightjs/8.0/styles/tomorrow-night.min.css">
+    <script src="//yandex.st/highlightjs/8.0/highlight.min.js"></script>
     <link rel="stylesheet" type="text/css" href="demo.css" />
 </head>
 
@@ -78,7 +75,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Simple Usage / Example</h1>
+                    <h1>Usage / Demos</h1>
+
+                    <h2>Basic Example</h2>
                     <select id="swapbox-demo-1" name="choice-toggle">
                         <option value="all">All Upcoming Events</option>
                         <option value="live">Upcoming Live Events</option>
@@ -106,7 +105,7 @@
 </code>
 </pre>
 
-                    <h1>Dynamic Append / Prepend Overrides</h1>
+                    <h2>Dynamic Append / Prepend Overrides</h1>
                     <select id="swapbox-demo-2" name="choice-toggle">
                         <option data-icon-class="fa fa-book" value="all">All Upcoming Events</option>
                         <option data-icon-class="fa fa-calendar" value="live">Upcoming Live Events</option>
@@ -138,15 +137,225 @@
     $(function() {
         $("#swapbox-demo-2").swapbox({
             itemPrepend: function(item) {
-                return "&lt;a href='#'&gt;&lt;span class='" + item.$option.attr('data-icon-class') + "'&gt;&lt;/span&gt; ";
+                return "&lt;span class='" + item.$option.attr('data-icon-class') + "'&gt;&lt;/span&gt; ";
             },
             itemAppend: function() {
-                return "&lt;/a&gt;";
+                return "";
             }
         });
     });
 &lt;/script&gt;
 </code>
+</pre>
+                    <h2>Binding to Events</h1>
+
+                    <div class="demo3-console panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Event Console</h3>
+                      </div>
+                      <div class="panel-body">
+                        Event messages created by the swapbox below will be presented here.
+
+                        <div class="well" style="overflow:auto; height:100px; padding:5px; font-family:Courier;">
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <select id="swapbox-demo-3" name="choice-toggle">
+                        <option data-icon-class="fa fa-book" value="all">All Upcoming Events</option>
+                        <option data-icon-class="fa fa-calendar" value="live">Upcoming Live Events</option>
+                        <option data-icon-class="fa fa-cloud" value="online">Online Courses</option>
+                    </select>
+
+                    <script>
+                        $(function() {
+                            var $console = $(".demo3-console > .panel-body > .well");
+                            var $eventCount = 0;
+                            var addMessage = function(msg) {
+                                $eventCount++
+                                $console.prepend("<div>[" + $eventCount + "] " + msg + "</div>");
+                            }
+                            $("#swapbox-demo-3").swapbox();
+                            
+                            //NEW EVENTS IN BOOTSTRAP-SWAPBOX
+                            $("#swapbox-demo-3").on("change.bs.swapbox", function(e) {
+                                addMessage("changed: " + $(this).val());
+                            });
+
+                            //PIGGY BACKED EVENTS FROM BOOTSTRAP DROPDOWN
+                            //show event
+                            $("#swapbox-demo-3").on("show.bs.swapbox", function(e) {
+                                addMessage("show");
+                            });
+
+                            //shown event
+                            $("#swapbox-demo-3").on("shown.bs.swapbox", function(e) {
+                                addMessage("shown");
+                            });
+
+                            //hide event
+                            $("#swapbox-demo-3").on("hide.bs.swapbox", function(e) {
+                                addMessage("hide");
+                            });
+
+                            //hidden event
+                            $("#swapbox-demo-3").on("hidden.bs.swapbox", function(e) {
+                                addMessage("hidden");
+                            });
+                        });
+                    </script>
+
+<pre>
+<code class="html">
+&lt;select id="swapbox-demo-3" name="swapbox-3"&gt;
+    &lt;option value="all"&gt;All Upcoming Events&lt;/option&gt;
+    &lt;option value="live"&gt;Upcoming Live Events&lt;/option&gt;
+    &lt;option value="online"&gt;Online Courses&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $(function() {
+        var $console = $(".demo3-console &gt; .panel-body &gt; .well");
+        var $eventCount = 0;
+        var addMessage = function(msg) {
+            $eventCount++
+            $console.prepend("&lt;div&gt;[" + $eventCount + "] " + msg + "&lt;/div&gt;");
+        }
+        $("#swapbox-demo-3").swapbox();
+        
+        //NEW EVENTS IN BOOTSTRAP-SWAPBOX
+        $("#swapbox-demo-3").on("change.bs.swapbox", function(e) {
+            addMessage("changed: " + $(this).val());
+        });
+
+        //PIGGY BACKED EVENTS FROM BOOTSTRAP DROPDOWN
+        //show event
+        $("#swapbox-demo-3").on("show.bs.swapbox", function(e) {
+            addMessage("show");
+        });
+
+        //shown event
+        $("#swapbox-demo-3").on("shown.bs.swapbox", function(e) {
+            addMessage("shown");
+        });
+
+        //hide event
+        $("#swapbox-demo-3").on("hide.bs.swapbox", function(e) {
+            addMessage("hide");
+        });
+
+        //hidden event
+        $("#swapbox-demo-3").on("hidden.bs.swapbox", function(e) {
+            addMessage("hidden");
+        });
+    });
+&lt;/script&gt;
+</code>
+</pre>
+
+                    <h2>With Facebook-like Native iOS App Look / Animation</h1>
+                    <select id="swapbox-demo-4" name="choice-toggle">
+                        <option data-icon-class="fa fa-book" value="all">All Upcoming Events</option>
+                        <option data-icon-class="fa fa-calendar" value="live">Upcoming Live Events</option>
+                        <option data-icon-class="fa fa-cloud" value="online">Online Courses</option>
+                    </select>
+
+                    <script>
+                        $(function() {
+                            var $myCustomBox = $("#swapbox-demo-4");
+                            
+                            $myCustomBox.swapbox({
+                                wrapCssClass: "my-custom-swapbox",
+                                itemPrepend: function(item) {
+                                    return "<span class='" + item.$option.attr('data-icon-class') + "'></span> ";
+                                },
+                                itemAppend: function() {
+                                    return "";
+                                }
+                            });
+
+                            $myCustomBox
+                                .on("show.bs.swapbox", function(e) {
+                                    var $swapboxWrap = $(e.relatedTarget);
+                                    var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
+
+                                    $swapboxWrap.addClass('opening');
+                                    $list.slideDown( 250 , function() {
+                                        $swapboxWrap.removeClass('opening');
+                                    });
+                                    //$swapboxWrap.delay(2000).removeClass('opening');
+                                    //$(this).find('.dropdown')
+                                })
+                                .on("shown.bs.swapbox", function(e) {
+                                    var $swapboxWrap = $(e.relatedTarget);
+                                    //var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
+
+                                    //$swapboxWrap.delay(250).removeClass('opening');
+                                    //$list.slideDown();
+                                    //$(this).find('.dropdown')
+                                })
+                                .on("hide.bs.swapbox", function(e) {
+                                    var $swapboxWrap = $(e.relatedTarget);
+                                    $swapboxWrap.addClass('closing')
+                                    var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
+                                    
+                                    $list.slideUp(250, function() {
+                                        $swapboxWrap.removeClass('closing')
+                                    });
+                                    //$(this).find('.dropdown')
+                                });
+                        });
+                    </script>
+
+<pre>
+<code class="javascript">
+$(function() {
+    var $myCustomBox = $("#swapbox-demo-4");
+    
+    $myCustomBox.swapbox({
+        wrapCssClass: "my-custom-swapbox",
+        itemPrepend: function(item) {
+            return "&lt;span class='" + item.$option.attr('data-icon-class') + "'>&lt;/span> ";
+        },
+        itemAppend: function() {
+            return "";
+        }
+    });
+
+    $myCustomBox
+        .on("show.bs.swapbox", function(e) {
+            var $swapboxWrap = $(e.relatedTarget);
+            var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
+
+            $swapboxWrap.addClass('opening');
+            $list.slideDown( 250 , function() {
+                $swapboxWrap.removeClass('opening');
+            });
+            //$swapboxWrap.delay(2000).removeClass('opening');
+            //$(this).find('.dropdown')
+        })
+        .on("shown.bs.swapbox", function(e) {
+            var $swapboxWrap = $(e.relatedTarget);
+            //var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
+
+            //$swapboxWrap.delay(250).removeClass('opening');
+            //$list.slideDown();
+            //$(this).find('.dropdown')
+        })
+        .on("hide.bs.swapbox", function(e) {
+            var $swapboxWrap = $(e.relatedTarget);
+            $swapboxWrap.addClass('closing')
+            var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
+            
+            $list.slideUp(250, function() {
+                $swapboxWrap.removeClass('closing')
+            });
+            //$(this).find('.dropdown')
+        });
+});
+</code>
+</pre>
                 </div>
             </div>
         </div>
@@ -189,13 +398,6 @@
       });
     });
     </script>
-    <!-- Core JavaScript Files -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="js/scrolling-nav.js"></script>
 
 </body>
 

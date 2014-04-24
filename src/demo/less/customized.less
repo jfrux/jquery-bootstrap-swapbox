@@ -1,0 +1,114 @@
+.my-custom-swapbox {
+  width:100%;
+  .dropdown-toggle {
+    float:none!important;
+    background-image:none;
+    background-color:#fafafa;
+    text-align:left;
+    font-weight:bold;
+    //.text-overflow();
+    //padding:10px;
+    span.fa {
+      color:#adb3bc;
+      margin-right: 3px;
+    }
+    width:100%;
+    //border-radius:3px;
+    outline:none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      outline:none;
+      background-image:none;
+      border-color:#CCCCCC;
+      .box-shadow(none);
+    }
+
+    &:focus {
+      background-color:#f0f0f0;
+    }
+  }
+  &.btn-group {
+    &.open,&.opening,&.closing {
+      .dropdown-toggle {
+        outline: none;
+        background-image:none;
+        background-color:#f0f0f0;
+        border-bottom:0;
+        background-image:inherit;
+        .box-shadow(none);
+        .border-bottom-radius(0);
+      }
+    }
+  }
+  
+  .dropdown-menu {
+    float:none;
+    border-top: 0 none;
+    margin-top: 0;
+    width: 100%;
+    position:inherit;
+    box-shadow: none;
+
+    .border-top-radius(0);
+    .border-bottom-radius(3px);
+    padding: 0;
+    li {
+      a {
+        padding:6px 12px;
+        color:#4d4d4d;
+        .text-overflow();
+        background-color:#fafafa;
+        border-top:1px solid #FFF;
+        border-bottom:1px solid #ededee;
+        border-radius:0;
+        outline: 0 none;
+        &:active,&:hover,&:focus {
+          outline: 0 none;
+        }
+        span.fa {
+          color:#adb3bc;
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: @screen-xs-max) {
+  .my-custom-swapbox {
+    > button {
+      .btn-lg();
+      
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        
+      }
+      
+      border-radius:3px;
+    }
+    &.open {
+      > button {
+        
+      }
+    }
+    .dropdown-menu {
+      li {
+        a {
+          .btn-lg();
+          outline:none;
+          border-radius:0;
+          &:active,&:hover,&:focus {
+            outline: 0 none;
+          }
+          span.fa {
+            
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,10 +3,10 @@
     var Swapbox, defaults, pluginName;
     pluginName = "swapbox";
     defaults = {
-      wrapCssClass: "swapbox-wrapper btn-group",
-      triggerCssClass: "swapbox-toggle btn btn-default dropdown-toggle",
-      itemCssClass: "swapbox-item",
-      listCssClass: "swapbox-list dropdown-menu",
+      wrapCssClass: "",
+      triggerCssClass: "",
+      itemCssClass: "",
+      listCssClass: "",
       itemPrepend: "<span>",
       itemAppend: "</span>"
     };
@@ -16,6 +16,7 @@
         this.options = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
+        this.$el = $(this.element);
         this.init();
         return;
       }
@@ -26,6 +27,8 @@
       };
 
       Swapbox.prototype.build = function() {
+        var self;
+        self = this;
         this.buildWrap();
         this.buildList();
         this.buildItems();
@@ -33,15 +36,21 @@
       };
 
       Swapbox.prototype.buildWrap = function() {
+        var self;
+        self = this;
         this.$wrap = $("<div></div>");
         this.$wrap.addClass(this.options.wrapCssClass);
+        this.$wrap.addClass("swapbox-wrapper btn-group");
         this.$wrap.insertAfter($(this.element));
       };
 
       Swapbox.prototype.buildList = function() {
+        var self;
+        self = this;
         this.$list = $("<ul></ul>");
         this.$list.attr("role", "menu");
         this.$list.addClass(this.options.listCssClass);
+        this.$list.addClass("swapbox-list dropdown-menu");
         this.$list.appendTo(this.$wrap);
       };
 
@@ -74,28 +83,55 @@
       };
 
       Swapbox.prototype.selectOption = function(item) {
-        var $select;
+        var $select, e, relatedTarget, self;
+        self = this;
         $select = $(this.element);
         this.$trigger.html(this.$list.find("[data-value='" + item.value + "'] > a").html());
         this.removeItem(item.value);
         $select.val(item.value);
+        relatedTarget = {
+          relatedTarget: self.$wrap[0]
+        };
+        if (item.value !== this.selected_item_value) {
+          self.$el.trigger(e = $.Event("change.bs.swapbox", relatedTarget));
+        }
+        this.selected_item_value = item.value;
       };
 
       Swapbox.prototype.removeItem = function(value) {
+        var self;
+        self = this;
         this.$list.children().removeClass("hide").end();
         this.$list.find("[data-value='" + value + "']").addClass("hide");
       };
 
       Swapbox.prototype.buildTrigger = function() {
-        var $selected_option, $trigger, option;
+        var $selected_option, $trigger, option, relatedTarget, self;
+        self = this;
         this.$trigger = $trigger = $("<button></button>");
         $trigger.addClass(this.options.triggerCssClass);
+        $trigger.addClass("swapbox-toggle btn btn-default dropdown-toggle");
         $trigger.attr("data-toggle", "dropdown");
         $selected_option = $(this.element).children().filter(":selected");
         option = this.splitOption($selected_option);
         this.selectOption(option);
         $trigger.prependTo(this.$wrap);
         $(this.element).hide();
+        relatedTarget = {
+          relatedTarget: self.$wrap[0]
+        };
+        this.$wrap.on("show.bs.dropdown", function(e) {
+          return self.$el.trigger(e = $.Event("show.bs.swapbox", relatedTarget));
+        });
+        this.$wrap.on("shown.bs.dropdown", function(e) {
+          return self.$el.trigger(e = $.Event("shown.bs.swapbox", relatedTarget));
+        });
+        this.$wrap.on("hide.bs.dropdown", function(e) {
+          return self.$el.trigger(e = $.Event("hide.bs.swapbox", relatedTarget));
+        });
+        this.$wrap.on("hidden.bs.dropdown", function(e) {
+          return self.$el.trigger(e = $.Event("hidden.bs.swapbox", relatedTarget));
+        });
       };
 
       Swapbox.prototype.splitOption = function($option) {
