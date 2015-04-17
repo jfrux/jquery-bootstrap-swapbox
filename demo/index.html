@@ -177,7 +177,7 @@
                                 $console.prepend("<div>[" + $eventCount + "] " + msg + "</div>");
                             }
                             $("#swapbox-demo-3").swapbox();
-                            
+
                             //NEW EVENTS IN BOOTSTRAP-SWAPBOX
                             $("#swapbox-demo-3").on("change.bs.swapbox", function(e) {
                                 addMessage("changed: " + $(this).val());
@@ -223,7 +223,7 @@
             $console.prepend("&lt;div&gt;[" + $eventCount + "] " + msg + "&lt;/div&gt;");
         }
         $("#swapbox-demo-3").swapbox();
-        
+
         //NEW EVENTS IN BOOTSTRAP-SWAPBOX
         $("#swapbox-demo-3").on("change.bs.swapbox", function(e) {
             addMessage("changed: " + $(this).val());
@@ -264,9 +264,10 @@
                     <script>
                         $(function() {
                             var $myCustomBox = $("#swapbox-demo-4");
-                            
+
                             $myCustomBox.swapbox({
                                 wrapCssClass: "my-custom-swapbox",
+                                triggerAppend: '</span><span class="fa fa-chevron-down" style="position:absolute;right: 9px;top: 9px;"></span>',
                                 itemPrepend: function(item) {
                                     return "<span class='" + item.$option.attr('data-icon-class') + "'></span> ";
                                 },
@@ -299,7 +300,7 @@
                                     var $swapboxWrap = $(e.relatedTarget);
                                     $swapboxWrap.addClass('closing')
                                     var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
-                                    
+
                                     $list.slideUp(250, function() {
                                         $swapboxWrap.removeClass('closing')
                                     });
@@ -312,7 +313,7 @@
 <code class="javascript">
 $(function() {
     var $myCustomBox = $("#swapbox-demo-4");
-    
+
     $myCustomBox.swapbox({
         wrapCssClass: "my-custom-swapbox",
         itemPrepend: function(item) {
@@ -347,7 +348,7 @@ $(function() {
             var $swapboxWrap = $(e.relatedTarget);
             $swapboxWrap.addClass('closing')
             var $list = $swapboxWrap.find('.swapbox-list').first().stop(true,true);
-            
+
             $list.slideUp(250, function() {
                 $swapboxWrap.removeClass('closing')
             });

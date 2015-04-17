@@ -15,7 +15,9 @@ do ($ = jQuery) -> #, window, document
 		listCssClass: ""
 		itemPrepend: "<span>"
 		itemAppend: "</span>"
-	
+		triggerPrepend: "<span>"
+		triggerAppend: "</span>"
+
 	# The actual plugin constructor
 	class Swapbox
 		constructor: (@element, options) ->
@@ -80,15 +82,27 @@ do ($ = jQuery) -> #, window, document
 		selectOption: (item) ->
 			self = @
 			$select = $(@element)
-			@$trigger.html(@$list.find("[data-value='" + item.value + "'] > a").html())
+			triggerPrepend = ""
+			triggerAppend = ""
+
+			if $.type(self.options.triggerPrepend) == "function"
+				triggerPrepend = self.options.triggerPrepend item
+			else
+				triggerPrepend = self.options.triggerPrepend
+
+			if $.type(self.options.triggerAppend) == "function"
+				triggerAppend = self.options.triggerAppend item
+			else
+				triggerAppend = self.options.triggerAppend
+			@$trigger.html("#{triggerPrepend}#{@$list.find("[data-value='" + item.value + "'] > a").html()}#{triggerAppend}")
 			@removeItem(item.value)
 			$select.val(item.value)
 			relatedTarget = { relatedTarget: self.$wrap[0] }
 			if item.value != @selected_item_value
 				self.$el.trigger(e = $.Event("change.bs.swapbox", relatedTarget))
-				
+
 			@selected_item_value = item.value
-			
+
 			return
 		removeItem: (value) ->
 			self = @
@@ -97,6 +111,7 @@ do ($ = jQuery) -> #, window, document
 			return
 		buildTrigger: ->
 			self = @
+
 			@$trigger = $trigger  = $("<button></button>")
 			$trigger.addClass(@options.triggerCssClass)
 			$trigger.addClass("swapbox-toggle btn btn-default dropdown-toggle")
@@ -104,6 +119,9 @@ do ($ = jQuery) -> #, window, document
 			$selected_option = $(@element).children().filter(":selected")
 			option = @splitOption($selected_option)
 			@selectOption(option)
+
+
+
 			$trigger.prependTo(@$wrap)
 			$(@element).hide()
 
@@ -116,11 +134,11 @@ do ($ = jQuery) -> #, window, document
 			@$wrap.on "shown.bs.dropdown", (e) ->
 				#self.$el.trigger("shown.bs.swapbox", e)
 				self.$el.trigger(e = $.Event("shown.bs.swapbox", relatedTarget))
-			
+
 			@$wrap.on "hide.bs.dropdown", (e) ->
 				#self.$el.trigger("hide.bs.swapbox", e)
 				self.$el.trigger(e = $.Event("hide.bs.swapbox", relatedTarget))
-			
+
 			@$wrap.on "hidden.bs.dropdown", (e) ->
 				#self.$el.trigger("hidden.bs.swapbox", e)
 				self.$el.trigger(e = $.Event("hidden.bs.swapbox", relatedTarget))

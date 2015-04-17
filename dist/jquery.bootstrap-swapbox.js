@@ -16,7 +16,9 @@
       itemCssClass: "",
       listCssClass: "",
       itemPrepend: "<span>",
-      itemAppend: "</span>"
+      itemAppend: "</span>",
+      triggerPrepend: "<span>",
+      triggerAppend: "</span>"
     };
     Swapbox = (function() {
       function Swapbox(element, options) {
@@ -91,10 +93,22 @@
       };
 
       Swapbox.prototype.selectOption = function(item) {
-        var $select, e, relatedTarget, self;
+        var $select, e, relatedTarget, self, triggerAppend, triggerPrepend;
         self = this;
         $select = $(this.element);
-        this.$trigger.html(this.$list.find("[data-value='" + item.value + "'] > a").html());
+        triggerPrepend = "";
+        triggerAppend = "";
+        if ($.type(self.options.triggerPrepend) === "function") {
+          triggerPrepend = self.options.triggerPrepend(item);
+        } else {
+          triggerPrepend = self.options.triggerPrepend;
+        }
+        if ($.type(self.options.triggerAppend) === "function") {
+          triggerAppend = self.options.triggerAppend(item);
+        } else {
+          triggerAppend = self.options.triggerAppend;
+        }
+        this.$trigger.html("" + triggerPrepend + (this.$list.find("[data-value='" + item.value + "'] > a").html()) + triggerAppend);
         this.removeItem(item.value);
         $select.val(item.value);
         relatedTarget = {
